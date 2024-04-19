@@ -8,6 +8,7 @@ let id;
 dadosValidos = false
 
 function CadastrarPessoa() { 
+    const id = ID()
     while (dadosValidos === false) {
         let nome = prompt("Nome: ");
         ValidName = nome
@@ -51,11 +52,21 @@ function CadastrarPessoa() {
 }
 
 
-function atualizar(id, campoAlterar) {
-    const ListaPessoas = ListaPessoas.find(p => p.id === id);
-    if (ListaPessoas) {
-        Object.assign(ListaPessoas, campoAlterar);
-    }
+function atualizar(id, campoAlterar, idAlterar) {
+    for (i in ListaPessoas) {
+        if (idAlterar == ListaPessoas[i].ID) {
+            if (campoAlterar == "nome") {
+                ListaPessoas[i].nome = prompt("Digite o novo nome: ");
+            } else if (campoAlterar == "idade") {
+                ListaPessoas[i].idade = prompt("Digite a nova idade: ");
+            } else if (campoAlterar == "cidade") {
+                ListaPessoas[i].cidade = prompt("Digite a nova cidade: ");
+            } else {
+                alert("O campo para alterar é inválido!");
+            }
+
+        } 
+}
 }
 
 function deletar() {
