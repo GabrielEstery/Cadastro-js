@@ -4,30 +4,8 @@ let cidade;
 let idade;
 let idAlterar;
 let idDeletar;
+let id;
 dadosValidos = false
-
-function validarNome(nome){
-    let regexNome = /^[a-zA-ZÀ-Á-Í-Ó-Ú-à-á-í-ó-ú\s]+$/; 
-    if (typeof nome !== "string" || !regexNome.test(nome)) {
-      alert("Nome inválido. Digite apenas letras e espaços."); 
-    }
-    
-}
-function validarIdade(idade){
-    if (isNaN(idade)) {
-        alert("Idade inválida. Digite apenas números inteiros.");
-        return;
-         }
-}
-function ValidarCidade(cidade){
-  let regexCidade = /^[a-zA-ZÀ-Á-Í-Ó-Ú-à-á-í-ó-ú\s]+$/; 
-  if (typeof cidade !== "string" || !regexCidade.test(cidade)) {
-    alert("Cidade inválida. Digite apenas letras e espaços.");
-    return; 
-  }
-}
-
-
 
 function CadastrarPessoa() { 
     while (dadosValidos === false) {
@@ -37,7 +15,7 @@ function CadastrarPessoa() {
         if (typeof nome !== "string" || !regexNome.test(nome)) {
           alert("Nome inválido. Digite apenas letras e espaços.");
         } else {
-          dadosValidos = true; // Nome válido, interrompe o loop
+          dadosValidos = true; 
         }
       }
       console.log("passou nome")
@@ -63,7 +41,7 @@ function CadastrarPessoa() {
         if (typeof cidade !== "string" || !regexCidade.test(cidade)) {
           alert("Nome inválido. Digite apenas letras e espaços.");
         } else {
-          dadosValidos = true; // Nome válido, interrompe o loop
+          dadosValidos = true; 
         }
       }
 
@@ -73,25 +51,15 @@ function CadastrarPessoa() {
 }
 
 
-function atualizar(idAlterar, campoAlterar) {
-    for (i in ListaPessoas) {
-        if (idAlterar == ListaPessoas[i].ID) {
-            if (campoAlterar == 1) {
-                ListaPessoas[i].nome = prompt("Digite o novo nome: ");
-            } else if (campoAlterar == "idade") {
-                ListaPessoas[i].idade = prompt("Digite a nova idade: ");
-            } else if (campoAlterar == "cidade") {
-                ListaPessoas[i].cidade = prompt("Digite a nova cidade: ");
-            } else {
-                alert("O campo para alterar é inválido!");
-            }
-
-        } 
-}
+function atualizar(id, campoAlterar) {
+    const ListaPessoas = ListaPessoas.find(p => p.id === id);
+    if (ListaPessoas) {
+        Object.assign(ListaPessoas, campoAlterar);
+    }
 }
 
 function deletar() {
-  // Implementar a lógica para deletar um cadastro (ainda não implementada)
+
   for (i in ListaPessoas) {
     if (idDeletar == ListaPessoas[i].ID) {
         ListaPessoas.splice(i,1);
@@ -115,19 +83,19 @@ while (saida === false) {
 
   switch (opcao) {
     case "1":
-      CadastrarPessoa(nome, idade, cidade);
-      break;
+        CadastrarPessoa(nome, idade, cidade);
+        break;
 
     case "2":
         let idAlterar= prompt("Digite o Id pra alternar: ")
         let campoAlterar = prompt("Digite o campo a alterar (nome, idade, cidade): ")
-      atualizar(idAlterar, campoAlterar);
-      break;
+        atualizar(idAlterar, campoAlterar);
+        break;
 
     case "3":
         let idDeletar= prompt("Digite o Id para deletar")
-      deletar(idDeletar); 
-      break;
+        deletar(idDeletar); 
+        break;
 
     case "4":
       listar(); 
